@@ -1,26 +1,31 @@
-#pragma once
+
+#ifndef BASIC_STUDENT_H
+#define BASIC_STUDENT_H
+
 #include "stdafx.h"
 
-class Student
-{
+class Student {
 public:
-	Student();
+  Student();
 
-	Student(int no, string name);
-	Student(int no, string name, string email);
+  Student(int no, string name);
+  Student(int no, string name, string email);
 
-	void setNo(int no);
-	int getNo();
+  void setNo(int no);
+  int getNo();
 
-	void setName(string name);
-	string getName();
+  void setName(string name);
+  string getName();
 
-	void setEmail(string email);
-	string getEmail();
+  void setEmail(string email);
+  string getEmail();
 
-	~Student();
+  ~Student();
+
 private:
-	int no;
-	string name;
-	string email;
+  int no;
+  string name;
+  string email;
 };
+
+#endif

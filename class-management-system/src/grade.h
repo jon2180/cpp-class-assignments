@@ -1,5 +1,8 @@
-#pragma once
-#include "./basic/student.cpp"
+
+#ifndef GRADE_H
+#define GRADE_H
+
+#include "./basic/student.h"
 
 class Grade : public Student {
 public:
@@ -27,3 +30,5 @@ private:
   char level;
   void setLevel(int score);
 };
+
+#endif

@@ -1,5 +1,7 @@
 #include "system.h"
 
+#include <fstream>
+
 System::System() {
   ifstream ImportSettings("./doc/settings.txt", ios::in);
   if (!ImportSettings.eof()) {

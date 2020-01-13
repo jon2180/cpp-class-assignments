@@ -1,6 +1,7 @@
-﻿#include "functions.h"
-int main()
-{
-	Welcome();
-    return 0;
+
+#include "functions.h"
+
+int main() {
+  Welcome();
+  return 0;
 }

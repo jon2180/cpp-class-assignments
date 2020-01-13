@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef SYSTEM_H
+#define SYSTEM_H
 
 #include "./basic/stdafx.h"
 
@@ -52,3 +54,5 @@ private:
   int default_auto_logout_time; //自动登出时间，不能小于课堂持续时长
   string default_class;         //默认哪个班的课
 };
+
+#endif
