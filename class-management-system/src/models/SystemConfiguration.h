@@ -2,24 +2,15 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include "./basic/stdafx.h"
+#include <fstream>
+#include <iostream>
+#include <string>
 
-class System {
+using namespace std;
+
+class SystemConfiguration {
 public:
-  System();
-
-  void setUsername(string username);
-  string getUsername();
-
-  void setPasswd(string passwd);
-  string getPasswd();
-
-  void SaveAccount();
-
-  void setWasEnrolled(bool was_enrolled);
-  bool getWasEnrolled();
-
-  bool Login();
+  SystemConfiguration();
 
   void setIsAutoCalculate(bool is_auto_calculate);
   bool getIsAutoCalculate();
@@ -39,14 +30,11 @@ public:
   void setDefaultClass(string default_class);
   string getDefaultClass();
 
-  void SaveSettings();
+  void saveSettings();
 
-  ~System();
+  ~SystemConfiguration();
 
 private:
-  string username;
-  string passwd;
-  bool was_enrolled;            //是否已登录
   bool is_auto_calculate;       //是否自动计算排名/平均分/方差
   int default_minus;            //减分默认值
   int default_plus;             //加分默认值
