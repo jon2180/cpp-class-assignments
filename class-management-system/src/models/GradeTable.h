@@ -59,7 +59,8 @@ public:
   void add(Grade stu);
 
   // Grade find(int no);
-
+  void swap(vector<Grade> &list, int i, int j);
+  void quickSort(vector<Grade> &list, int l, int r);
   double getAvg();
 
   vector<Grade>::iterator find(int no);

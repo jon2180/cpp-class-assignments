@@ -15,7 +15,6 @@ using namespace std;
 
 class Controller {
 private:
-
   View view{};
   SystemConfiguration sys{};
   Login loginHandler{};
@@ -45,6 +44,7 @@ public:
    * 随机选择一个学生进行提问，并可选择加减分
    */
   void randomSelect();
+  bool plusOrMinusScore(Grade &t);
 
   /**
    * 查找一个指定的学生，并且可以加分或减分

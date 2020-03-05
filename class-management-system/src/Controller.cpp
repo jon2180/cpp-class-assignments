@@ -5,14 +5,13 @@ Controller::Controller(/* args */) {}
 Controller::~Controller() {}
 
 void Controller::run() {
-  //检验是否已登录-------------------------------------------
+  // 检验是否已登录
   if (!login()) {
     cout << "你已经错误地输入3次密码，自动退出!" << endl;
-    // exitSafely();
     return;
   }
 
-  //进入主界面----------------------------------------------
+  // 进入主界面
   int operation;
   while (true) {
     View::MainOption();
@@ -99,7 +98,6 @@ void Controller::importStuInfo() {
     while (!in.eof()) {
       in >> no_temp >> name_temp >> score_temp;
       table.add(Grade{no_temp, name_temp, score_temp});
-      // cout << no_temp << name_temp << email_temp << score_temp << endl;
       in.get(); // 读取最后的回车符
       if (in.peek() == '\n')
         break;
@@ -112,7 +110,6 @@ void Controller::importStuInfo() {
 }
 
 void Controller::importData() {
-  system("clear");
   View::SubOption_1();
   int option;
   cin >> option;
@@ -129,24 +126,42 @@ void Controller::importData() {
 }
 
 void Controller::printAll() {
-  // system("clear");
-  // //排序操作
-  // cout << "按分数从高到低输出？[y/n]" << endl;
-  // char option;
-  // cin >> option;
-  // switch (option) {
-  // case 'y':
-  // case 'Y':
-  //   Sort(stu, 0, N - 1);
-  //   break;
-  // default:
-  //   cout << "将不按分数从高到低输出：" << endl;
-  // }
-  // // AutoCalculate();
+  // 排序操作
+  table.sort();
   view.ShowStuInfo(table);
 }
 
-// opertation 3rd
+bool Controller::plusOrMinusScore(Grade &t) {
+  View::SubOption_2_3();
+
+  int option;
+  int score_temp;
+
+  cin >> option >> score_temp;
+
+  switch (option) {
+  case 1:
+    score_temp += t.score;
+    t.score = score_temp;
+    cout << "学号\t"
+         << "姓名\t"
+         << "分数" << endl;
+    cout << t;
+    return true;
+  case 2:
+    score_temp = t.score - score_temp;
+    t.score = score_temp;
+    cout << "学号\t"
+         << "姓名\t"
+         << "分数" << endl;
+    cout << t;
+    return true;
+  default:
+    cout << "回到主菜单" << endl;
+    return false;
+  }
+}
+
 void Controller::randomSelect() {
   int i = rand() % table.size();
   cout << "学号\t"
@@ -155,139 +170,59 @@ void Controller::randomSelect() {
 
   cout << table[i];
 
-  // CalculateScore(i);
+  plusOrMinusScore(table[i]);
 }
 
-// void CalculateScore(int i) {
-//   SubOption_2_3();
-//   int option;
-//   int score_temp;
-//   cin >> option >> score_temp;
-//   switch (option) {
-//   case 1:
-//     score_temp += stu[i].getScore();
-//     stu[i].setScore(score_temp);
-//     cout << "学号\t"
-//          << "姓名\t"
-//          << "分数" << endl;
-//     cout << stu[i].getNo() << "\t" << stu[i].getName() << "\t"
-//          << stu[i].getScore() << endl;
-//     break;
-//   case 2:
-//     score_temp = stu[i].getScore() - score_temp;
-//     stu[i].setScore(score_temp);
-//     cout << "学号\t"
-//          << "姓名\t"
-//          << "分数" << endl;
-//     cout << stu[i].getNo() << "\t" << stu[i].getName() << "\t"
-//          << stu[i].getScore() << endl;
-//     break;
-//   default:
-//     cout << "回到主菜单" << endl;
-//   }
-// }
-
-// operation 3rd
 void Controller::queryAndPlusScore() {
-  system("clear");
-  View::SubOption_3();
+  cout << "\n请输入学号查找\n > ";
+  int no_temp = -1;
+  cin >> no_temp;
 
-  int temp = -1;
-  int option;
-  cin >> option;
-  string name_temp;
-  int no_temp;
-  switch (option) {
-  case 1:
-    cout << "\n请输入姓名\n > ";
-
-    cin >> name_temp;
-    // for (int i = 0; i < N; i++) {
-    //   if (stu[i].getName() == name_temp) {
-    //     temp = i;
-    //     break;
-    //   }
-    // }
-    break;
-  case 2:
-    cout << "\n请输入学号\n > ";
-    cin >> no_temp;
-    // auto data = table.find(no_temp);
-    // if (data == table.end()) {
-    //   cout << "没找到" << endl;
-    //   break;
-    // }
-    break;
-  default:
-    cout << "错误输入，回到主菜单" << endl;
+  auto data = table.find(no_temp);
+  if (data == table.end()) {
+    cout << "没找到" << endl;
     return;
   }
+
   cout << "学号\t"
        << "姓名\t"
        << "分数\t"
        << "等级" << endl;
+  cout << *data;
 
-  // cout << stu[temp].getNo() << "\t" << stu[temp].getName() << "\t"
-  //      << stu[temp].getEmail() << "\t" << stu[temp].getScore() << "\t"
-  //      << stu[temp].getLevel() << endl;
-  View::SubOption_2_3();
+  plusOrMinusScore(*data);
 }
 
-// // operation 4th
-
-// operation 5th
 void Controller::openAlerm() {
-  system("clear");
   time_t now_time;
   now_time = time(NULL);
   cout << "当前时间：" << now_time << endl;
 }
 
 void Controller::modifySysConf() {
-  system("clear");
-  View::SubOption_6();
-  int option;
-  cin >> option;
-  // if (option == 1) {
-  //   string username_new;
-  //   string passwd_new;
-  //   cout << "请输入您想使用的用户名：\n > ";
-  //   cin >> username_new;
-  //   cout << "请输入您的密码：\n > ";
-  //   cin >> passwd_new;
-  //   sys.setUsername(username_new);
-  //   sys.setPasswd(passwd_new);
-  //   sys.SaveAccount();
-  //   cout << "用户 " << username_new << " 修改成功" << endl;
-  // } else
-  if (option == 2) {
-    View::ShowSettings(sys);
+  View::ShowSettings(sys);
 
-    bool is_auto_calculate_temp;
-    int default_minus_temp;
-    int default_plus_temp;
-    int default_class_time_temp;
-    int default_auto_logout_time_temp;
-    string default_class_temp;
+  bool is_auto_calculate_temp;
+  int default_minus_temp;
+  int default_plus_temp;
+  int default_class_time_temp;
+  int default_auto_logout_time_temp;
+  string default_class_temp;
 
-    cout << "请按以上顺序依次输入设置项: \n > " << endl;
-    cin >> is_auto_calculate_temp >> default_minus_temp >> default_plus_temp >>
-        default_class_time_temp >> default_auto_logout_time_temp >>
-        default_class_temp;
+  cout << "请按以上顺序依次输入设置项: \n > " << endl;
+  cin >> is_auto_calculate_temp >> default_minus_temp >> default_plus_temp >>
+      default_class_time_temp >> default_auto_logout_time_temp >>
+      default_class_temp;
 
-    sys.setIsAutoCalculate(is_auto_calculate_temp);
-    sys.setDefaultMinus(default_minus_temp);
-    sys.setDefaultPlus(default_plus_temp);
-    sys.setDefaultClassTime(default_class_time_temp);
-    sys.setDefaultAutoLogoutTime(default_auto_logout_time_temp);
-    sys.setDefaultClass(default_class_temp);
+  sys.setIsAutoCalculate(is_auto_calculate_temp);
+  sys.setDefaultMinus(default_minus_temp);
+  sys.setDefaultPlus(default_plus_temp);
+  sys.setDefaultClassTime(default_class_time_temp);
+  sys.setDefaultAutoLogoutTime(default_auto_logout_time_temp);
+  sys.setDefaultClass(default_class_temp);
 
-    sys.saveSettings();
-    cout << "设置成功" << endl;
-  } else {
-    cout << "没有您输入的选项,回到主菜单" << endl;
-    return;
-  }
+  sys.saveSettings();
+  cout << "设置成功" << endl;
 }
 
 void Controller::exitSafely() {
