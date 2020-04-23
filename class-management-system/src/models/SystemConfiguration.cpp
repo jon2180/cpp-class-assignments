@@ -63,4 +63,4 @@ void SystemConfiguration::saveSettings() {
   Save.close();
 }
 
-SystemConfiguration::~SystemConfiguration() {}
+SystemConfiguration::~SystemConfiguration() = default;

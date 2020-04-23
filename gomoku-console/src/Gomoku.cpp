@@ -6,9 +6,6 @@
  */
 
 #include "GameController.h"
-#include "pch.h"
-
-#include <iostream>
 
 int main() {
   GameController game;

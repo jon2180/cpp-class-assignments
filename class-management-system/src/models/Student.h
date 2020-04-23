@@ -9,10 +9,10 @@ class Student {
 public:
   Student(int no, string name);
 
-  void setNo(int no);
+  void setNo(int I);
   int getNo();
 
-  void setName(string name);
+  void setName(string newName);
   string getName();
 
   ~Student();

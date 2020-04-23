@@ -13,7 +13,7 @@ private:
   GameData *data;
 
 public:
-  GameView(GameData *data);
+  explicit GameView(GameData *data);
   ~GameView();
   static void printMenu();
   static void printRules();

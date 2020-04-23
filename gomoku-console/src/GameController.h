@@ -20,7 +20,7 @@ public:
   int run();
   void onePlayerMode();
   void twoPlayerMode();
-  void writeToFile(int, int, string); //文件写入
+  void writeToFile(int, int, const string&); //文件写入
   ~GameController();
 
 private:

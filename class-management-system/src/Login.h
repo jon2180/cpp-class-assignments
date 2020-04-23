@@ -26,11 +26,11 @@ public:
 
   void logout();
 
-  bool signup(string username, string password);
+  bool signup(const string& username, const string& password);
 
-  bool check(string username, string password);
+  bool check(const string& username, const string& password);
 
-  bool containes(string username);
+  bool contains(const string& username);
 
   void writeAccount2File();
 

@@ -2,10 +2,11 @@
 #ifndef GRADE_H
 #define GRADE_H
 
-// #include "Student.h"
 
+#include <algorithm>
 #include <iostream>
 #include <string>
+#include <utility>
 #include <vector>
 using namespace std;
 
@@ -13,10 +14,14 @@ class Grade {
 public:
   int no;
   string name;
-  double score;
+  double score{};
 
-  Grade(int no, string name) : no{no}, name{name} {}
-  Grade(int no, string name, double score) : no{no}, name{name}, score{score} {}
+  Grade(int no, string name) : no{no}, name{std::move(name)} {}
+  Grade(int no, string name, double score) : no{no}, name{std::move(name)}, score{score} {}
+
+  bool operator<(const Grade &other) const { return score < other.score; }
+  bool operator>(const Grade &other) const { return score > other.score; }
+  bool operator==(const Grade &other) const { return score == other.score; }
   friend ostream &operator<<(ostream &out, Grade &item) {
     out << item.no << "\t" << item.name << "\t" << item.score << "\t"
         << item.getLevel() << endl;
@@ -29,7 +34,7 @@ public:
     return out;
   }
 
-  char getLevel() const {
+  [[nodiscard]] char getLevel() const {
     if (score > 70 && score < 80) {
       return 'C';
       // level = 'C';
@@ -59,8 +64,7 @@ public:
   void add(Grade stu);
 
   // Grade find(int no);
-  void swap(vector<Grade> &list, int i, int j);
-  void quickSort(vector<Grade> &list, int l, int r);
+  // void swap(vector<Grade> &list, int i, int j);
   double getAvg();
 
   vector<Grade>::iterator find(int no);
@@ -75,7 +79,7 @@ public:
 
   void sort();
 
-  int size() const { return stuVector.size(); }
+  [[nodiscard]] int size() const { return stuVector.size(); }
 
 private:
   vector<Grade> stuVector{};

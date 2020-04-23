@@ -63,7 +63,7 @@ void GameController::twoPlayerMode() {
 int GameController::run() {
   // 循环
   bool turnBlack = true;
-  while (1) {
+  while (true) {
     /* code */
     view->printBoard();
 
@@ -80,7 +80,7 @@ int GameController::run() {
 
 //========================================================================
 //文件操作
-void GameController::writeToFile(int x, int y, string player) {
+void GameController::writeToFile(int x, int y, const string& player) {
   if (stonePos.is_open()) {
     stonePos << "(" << x << ", " << y << ") " << player << endl;
   }
@@ -109,7 +109,7 @@ bool GameController::setTile(bool turnBlack) {
   // posX 的下标
   int pX = hashPosX[x - 'A'];
   int pY = posY - 1;
-  if (data->inBoard(pX, pY) && !data->getTile(pX, pY)) {
+  if (GameData::inBoard(pX, pY) && !data->getTile(pX, pY)) {
     data->setTile(pX, pY, turnBlack ? BLACK : WHITE);
     writeToFile(pX, pY, turnBlack ? "Black" : "White");
     return true;

@@ -13,6 +13,7 @@ void GameView::printLine() {
   }
   cout << "|" << endl;
 }
+
 // 输出游戏场景
 void GameView::printBoard() {
   cout << "  ";
@@ -21,8 +22,6 @@ void GameView::printBoard() {
   }
   cout << "|" << endl;
   printLine();
-  //
-  int tmpKey;
   for (int j = 1; j <= ROW; j++) {
     if (j < 10)
       cout << " ";
@@ -30,12 +29,7 @@ void GameView::printBoard() {
     for (int i = 1; i <= COL; i++) {
       cout << "|";
       cout << " ";
-
-      // TODO
-      //  tmpKey = trans(i, j);
-      cout << data->getTile(i - 1, j - 1);
-      // cout << transChar(data->getTile(i, j));
-      //   transChar(chess[tmpKey].getState());
+      cout << transChar(data->getTile(i - 1, j - 1));
       cout << " ";
     }
     cout << "|" << endl;
@@ -77,4 +71,4 @@ char GameView::transChar(int state) {
     return ' ';
 }
 
-GameView::~GameView() {}
+GameView::~GameView() = default;

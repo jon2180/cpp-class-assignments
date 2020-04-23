@@ -1,1 +1,4 @@
-debug/
+res/
+cmake-build-debug/
+lib/
+.idea/

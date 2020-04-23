@@ -35,53 +35,7 @@ void GradeTable::saveStuInfo() {
   save.close();
 }
 
-void GradeTable::swap(vector<Grade> &list, int i, int j) {
-  Grade item = list[i];
-  list[i] = list[j];
-  list[j] = item;
-}
-
-/**
- * 快速排序 递归调用
- */
-void GradeTable::quickSort(vector<Grade> &list, int l, int r) {
-  if (l >= r)
-    return;
-
-  // 用数组最后一个元素作为 partition 的比较基数
-  int less = l - 1;
-  int more = r;
-
-  int idx = l;
-
-  // 降序
-  while (idx < more) {
-    if (list[idx].score > list[r].score) {
-      swap(list, ++less, idx++);
-    } else if (list[idx].score < list[r].score) {
-      swap(list, --more, idx);
-    } else {
-      idx++;
-    }
-  }
-  // // 升序
-  //   while (idx < more) {
-  //     if (list[idx].score < list[r].score) {
-  //       swap(list, ++less, idx++);
-  //     } else if (list[idx].score > list[r].score) {
-  //       swap(list, --more, idx);
-  //     } else {
-  //       idx++;
-  //     }
-  //   }
-
-  swap(list, more, r);
-
-  quickSort(list, l, less);
-  quickSort(list, more + 1, r);
-}
-
 void GradeTable::sort() {
   if (stuVector.size() > 1)
-    quickSort(stuVector, 0, stuVector.size() - 1);
+    std::sort(stuVector.begin(), stuVector.end());
 }

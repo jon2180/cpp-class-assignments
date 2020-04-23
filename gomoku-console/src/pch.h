@@ -9,8 +9,6 @@
 #ifndef PCH_H
 #define PCH_H
 
-// TODO: add headers that you want to pre-compile here
-
 constexpr auto ROW = 15;
 constexpr auto COL = 15;
 

@@ -63,7 +63,7 @@ bool Controller::login() {
          << endl;
     cin >> username_past >> passwd_past;
 
-    if (username_past != "" && passwd_past != "" &&
+    if (!username_past.empty() && !passwd_past.empty() &&
         loginHandler.check(username_past, passwd_past)) {
       cout << "欢迎您，" << username_past << endl;
       return true;
@@ -76,14 +76,15 @@ bool Controller::login() {
 }
 
 void Controller::inputStuInfo() {
-  int no_temp;
+  int no_temp = 0;
   string name_temp;
   double score_temp;
   cout << "学生信息格式：学号(int) 姓名 分数" << endl;
-  while (no_temp != -1) {
+  while (true) {
     cin >> no_temp >> name_temp >> score_temp;
-    if (no_temp != -1)
-      table.add(Grade{no_temp, name_temp, score_temp});
+    if (no_temp == -1)
+      break;
+    table.add(Grade{no_temp, name_temp, score_temp});
   }
   cout << "添加成功!" << endl;
 }
@@ -111,7 +112,7 @@ void Controller::importStuInfo() {
 
 void Controller::importData() {
   View::SubOption_1();
-  int option;
+  int option = 0;
   cin >> option;
   switch (option) {
   case 1:

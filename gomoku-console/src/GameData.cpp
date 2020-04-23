@@ -4,7 +4,7 @@
 
 GameData::GameData(/* args */) { memset(board, NOTSET, sizeof(board)); }
 
-GameData::~GameData() {}
+GameData::~GameData() = default;
 
 int GameData::getTile(int x, int y) { return board[y][x]; }
 void GameData::setTile(int x, int y, int val) { board[y][x] = val; }
@@ -24,13 +24,13 @@ int GameData::checkWin() {
         continue;
 
       // search the directions
-      for (int i = 0; i < 4; ++i) {
+      for (auto i : CHECK_DIRECTION) {
 
         //
         int count = 1;
         for (int n = 1; n < 5; ++n) {
-          int nextX = x + CHECK_DIRECTION[i][0] * n;
-          int nextY = y + CHECK_DIRECTION[i][1] * n;
+          int nextX = x + i[0] * n;
+          int nextY = y + i[1] * n;
 
           if (!inBoard(nextX, nextY) || getTile(nextX, nextY) != curr)
             break;

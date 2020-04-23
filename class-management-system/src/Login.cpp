@@ -6,19 +6,19 @@ Login::Login() {
   string password;
   while (!in.eof()) {
     in >> username >> password;
-    if (username != "" && password != "")
+    if (!username.empty() && !password.empty())
       userList.insert(pair<string, string>{username, password});
   }
   in.close();
 }
 
-Login::~Login() {}
+Login::~Login() = default;
 
 bool Login::getHasLogin() { return hasLogin; }
 
 void Login::logout() { hasLogin = false; }
 
-bool Login::signup(string username, string password) {
+bool Login::signup(const string& username, const string& password) {
   auto result = userList.find(username);
   // 如果不存在这个账号
   if (result == userList.end()) {
@@ -29,7 +29,7 @@ bool Login::signup(string username, string password) {
   return false;
 }
 
-bool Login::check(string username, string password) {
+bool Login::check(const string& username, const string& password) {
   auto result = userList.find(username);
   // 如果不存在这个账号
   if (result == userList.end())
@@ -43,7 +43,7 @@ bool Login::check(string username, string password) {
     return false;
 }
 
-bool Login::containes(string username) {
+bool Login::contains(const string& username) {
   return userList.find(username) != userList.end();
 }
 

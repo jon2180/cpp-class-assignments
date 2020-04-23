@@ -2,7 +2,7 @@
 #include "Controller.h"
 
 int main() {
-  Controller c{};
+  Controller c;
   c.run();
   return 0;
 }
