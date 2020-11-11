@@ -7,6 +7,14 @@
 
 #include "Game.h"
 
+#ifdef __linux__
+#define CLEAR_SCREEN "clear"
+
+#elif _WIN32
+#define CLEAR_SCREEN "cls"
+
+#endif
+
 Game::Game() { initGame(); }
 
 // 初始化游戏
@@ -68,7 +76,7 @@ void Game::twoPlayerMode() {
   p = player02;
 
   while (1) {
-    system("cls");
+    system(CLEAR_SCREEN);
     cout << "=========================[ Game Rules ]========================"
          << endl;
     cout << endl;
